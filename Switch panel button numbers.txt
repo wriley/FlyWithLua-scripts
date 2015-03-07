@@ -1,0 +1,17 @@
+Note: X-Plane starts at 1, FlyWithLua starts at 0
+
+Left		
+Right		
+Both		
+Start		
+Alt			1125
+Bat			1126
+Fuel Pump	1133
+Beacon		1132
+Land		1131
+Taxi		1130
+Nav			1129
+Strobe		1128
+Pitot		1127
+Avionics	1134
+CarbHeat	1135
