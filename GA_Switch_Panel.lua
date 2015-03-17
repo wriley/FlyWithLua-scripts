@@ -37,7 +37,7 @@ dataref("xp_parkbrake", "sim/flightmodel/controls/parkbrake", "writable")
 
 function switch_panel()
 	-- generator
-	if button(1124) then
+	if button(644) then
 		xp_generator_array[0] = 1
 	else
 		xp_generator_array[0] = 0
@@ -45,14 +45,14 @@ function switch_panel()
 	XPLMSetDatavi(xp_generator_ref, xp_generator_array, 0, 8)
 	
 	-- battery
-	if button(1125) then
+	if button(645) then
 		xp_battery = 1
 	else
 		xp_battery = 0
 	end
 	
 	-- fuel pump
-	if button(1132) then
+	if button(652) then
 		xp_fuel_pump_array[0] = 1
 	else
 		xp_fuel_pump_array[0] = 0
@@ -60,56 +60,56 @@ function switch_panel()
 	XPLMSetDatavi(xp_fuel_pump_ref, xp_fuel_pump_array, 0, 8)
 	
 	-- beacon
-	if button(1131) then
+	if button(651) then
 		xp_beacon = 1
 	else
 		xp_beacon = 0
 	end
 	
 	-- landing
-	if button(1130) then
+	if button(650) then
 		xp_landing = 1
 	else
 		xp_landing = 0
 	end
 	
 	-- taxi
-	if button(1129) then
+	if button(649) then
 		xp_taxi = 1
 	else
 		xp_taxi = 0
 	end
 	
 	-- nav
-	if button(1128) then
+	if button(648) then
 		xp_nav = 1
 	else
 		xp_nav = 0
 	end
 	
 	-- strobe
-	if button(1127) then
+	if button(647) then
 		xp_strobe = 1
 	else
 		xp_strobe = 0
 	end
 	
 	-- pitot
-	if button(1126) then
+	if button(646) then
 		xp_pitot = 1
 	else
 		xp_pitot = 0
 	end
 	
 	-- avionics
-	if button(1133) then
+	if button(653) then
 		xp_avionics = 1
 	else
 		xp_avionics = 0
 	end
 	
 	-- parkbrake
-	if button(1134) then
+	if button(654) then
 		xp_parkbrake = 1
 	else
 		xp_parkbrake = 0
