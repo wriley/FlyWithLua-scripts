@@ -1,4 +1,20 @@
-logMsg("GS_Switch_Panel script loaded")
+logMsg("GA_Switch_Panel script loaded")
+
+-- Define buttons
+btn_generator = 644
+btn_battery = 645
+btn_fuel_pump = 652
+btn_beacon = 651
+btn_landing = 650
+btn_taxi = 649
+btn_nav = 648
+btn_strobe = 647
+btn_pitot = 646
+btn_avionics = 653
+btn_parkbrake = 654
+
+-- starter switch_panel
+-- TODO
 
 -- generator
 xp_generator_ref = XPLMFindDataRef("sim/cockpit/electrical/generator_on")
@@ -36,80 +52,95 @@ dataref("xp_avionics", "sim/cockpit/electrical/avionics_on", "writable")
 dataref("xp_parkbrake", "sim/flightmodel/controls/parkbrake", "writable")
 
 function switch_panel()
+	-- starter switch_panel
+	-- TODO
+	
 	-- generator
-	if button(644) then
+	if button(btn_generator) then
 		xp_generator_array[0] = 1
+		xp_generator_array[1] = 1
+		xp_generator_array[2] = 1
+		xp_generator_array[3] = 1
 	else
 		xp_generator_array[0] = 0
+		xp_generator_array[1] = 0
+		xp_generator_array[2] = 0
+		xp_generator_array[3] = 0
 	end
 	XPLMSetDatavi(xp_generator_ref, xp_generator_array, 0, 8)
 	
 	-- battery
-	if button(645) then
+	if button(btn_battery) then
 		xp_battery = 1
 	else
 		xp_battery = 0
 	end
 	
 	-- fuel pump
-	if button(652) then
+	if button(btn_fuel_pump) then
 		xp_fuel_pump_array[0] = 1
+		xp_fuel_pump_array[1] = 1
+		xp_fuel_pump_array[2] = 1
+		xp_fuel_pump_array[3] = 1
 	else
 		xp_fuel_pump_array[0] = 0
+		xp_fuel_pump_array[1] = 0
+		xp_fuel_pump_array[2] = 0
+		xp_fuel_pump_array[3] = 0
 	end
 	XPLMSetDatavi(xp_fuel_pump_ref, xp_fuel_pump_array, 0, 8)
 	
 	-- beacon
-	if button(651) then
+	if button(btn_beacon) then
 		xp_beacon = 1
 	else
 		xp_beacon = 0
 	end
 	
 	-- landing
-	if button(650) then
+	if button(btn_landing) then
 		xp_landing = 1
 	else
 		xp_landing = 0
 	end
 	
 	-- taxi
-	if button(649) then
+	if button(btn_taxi) then
 		xp_taxi = 1
 	else
 		xp_taxi = 0
 	end
 	
 	-- nav
-	if button(648) then
+	if button(btn_nav) then
 		xp_nav = 1
 	else
 		xp_nav = 0
 	end
 	
 	-- strobe
-	if button(647) then
+	if button(btn_strobe) then
 		xp_strobe = 1
 	else
 		xp_strobe = 0
 	end
 	
 	-- pitot
-	if button(646) then
+	if button(btn_pitot) then
 		xp_pitot = 1
 	else
 		xp_pitot = 0
 	end
 	
 	-- avionics
-	if button(653) then
+	if button(btn_avionics) then
 		xp_avionics = 1
 	else
 		xp_avionics = 0
 	end
 	
 	-- parkbrake
-	if button(654) then
+	if button(btn_parkbrake) then
 		xp_parkbrake = 1
 	else
 		xp_parkbrake = 0
