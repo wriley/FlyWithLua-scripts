@@ -1,24 +1,23 @@
 logMsg("GA_Switch_Panel script loaded")
 
 -- Define buttons
-btn_generator = 644
-btn_battery = 645
-btn_fuel_pump = 652
-btn_beacon = 651
-btn_landing = 650
-btn_taxi = 649
-btn_nav = 648
-btn_strobe = 647
-btn_pitot = 646
-btn_avionics = 653
-btn_parkbrake = 654
+btn_generator = 484
+btn_battery = 485
+btn_fuel_pump = 492
+btn_beacon = 491
+btn_landing = 490
+btn_taxi = 489
+btn_nav = 488
+btn_strobe = 487
+btn_pitot = 486
+btn_avionics = 493
+btn_parkbrake = 494
 
 -- starter switch_panel
 -- TODO
 
 -- generator
-xp_generator_ref = XPLMFindDataRef("sim/cockpit/electrical/generator_on")
-xp_generator_array = XPLMGetDatavi(xp_generator_ref, 0, 8)
+dataref("xp_generator", "sim/cockpit2/electrical/generator_on", "writable")
 
 -- battery
 dataref("xp_battery", "sim/cockpit/electrical/battery_on", "writable")
@@ -28,25 +27,26 @@ xp_fuel_pump_ref = XPLMFindDataRef("sim/cockpit/engine/fuel_pump_on")
 xp_fuel_pump_array = XPLMGetDatavi(xp_fuel_pump_ref, 0, 8)
 
 -- beacon
-dataref("xp_beacon", "sim/cockpit/electrical/beacon_lights_on", "writable")
+dataref("xp_beacon", "sim/cockpit2/switches/beacon_on", "writable")
 
 -- landing
-dataref("xp_landing", "sim/cockpit/electrical/landing_lights_on", "writable")
+dataref("xp_landing", "sim/cockpit2/switches/landing_lights_switch", "writable")
 
 -- taxi
-dataref("xp_taxi", "sim/cockpit/electrical/taxi_light_on", "writable")
+dataref("xp_taxi", "sim/cockpit2/switches/taxi_light_on", "writable")
 
 -- nav
-dataref("xp_nav", "sim/cockpit/electrical/nav_lights_on", "writable")
+dataref("xp_nav", "sim/cockpit2/switches/navigation_lights_on", "writable")
 
 -- strobe
-dataref("xp_strobe", "sim/cockpit/electrical/strobe_lights_on", "writable")
+dataref("xp_strobe", "sim/cockpit2/switches/strobe_lights_on", "writable")
 
 -- pitot
 dataref("xp_pitot", "sim/cockpit/switches/pitot_heat_on", "writable")
 
 -- avionics
-dataref("xp_avionics", "sim/cockpit/electrical/avionics_on", "writable")
+dataref("xp_avionics", "sim/cockpit2/switches/avionics_power_on", "writable")
+dataref("xp_avionics2", "sim/cockpit2/electrical/cross_tie", "writable")
 
 -- parkbrake
 dataref("xp_parkbrake", "sim/flightmodel/controls/parkbrake", "writable")
@@ -57,17 +57,10 @@ function switch_panel()
 	
 	-- generator
 	if button(btn_generator) then
-		xp_generator_array[0] = 1
-		xp_generator_array[1] = 1
-		xp_generator_array[2] = 1
-		xp_generator_array[3] = 1
+		xp_generator = 1
 	else
-		xp_generator_array[0] = 0
-		xp_generator_array[1] = 0
-		xp_generator_array[2] = 0
-		xp_generator_array[3] = 0
+		xp_generator = 0
 	end
-	XPLMSetDatavi(xp_generator_ref, xp_generator_array, 0, 8)
 	
 	-- battery
 	if button(btn_battery) then
@@ -135,8 +128,10 @@ function switch_panel()
 	-- avionics
 	if button(btn_avionics) then
 		xp_avionics = 1
+        xp_avionics2 = 1
 	else
 		xp_avionics = 0
+        xp_avionics2 = 0
 	end
 	
 	-- parkbrake
