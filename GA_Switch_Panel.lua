@@ -15,7 +15,7 @@ btn_strobe    = btn_base + 10
 btn_pitot     = btn_base + 11
 btn_avionics  = btn_base + 12
 btn_parkbrake = btn_base + 13
-btn_extra     = btn_base + 14
+btn_gear      = btn_base + 14
 btn_starter   = btn_base + 15
 
 -- ignition key
@@ -55,6 +55,9 @@ dataref("xp_avionics2", "sim/cockpit2/electrical/cross_tie", "writable")
 
 -- parkbrake
 dataref("xp_parkbrake", "sim/flightmodel/controls/parkbrake", "writable")
+
+-- landing gear
+dataref("xp_gear", "sim/cockpit2/controls/gear_handle_down", "writable")
 
 function switch_panel()
     -- ignition key
@@ -170,6 +173,13 @@ function switch_panel()
         xp_parkbrake = 1
     else
         xp_parkbrake = 0
+    end
+    
+    -- landing gear
+    if button(btn_gear) then
+        xp_gear = 0
+    else
+        xp_gear = 1
     end
 end
 
