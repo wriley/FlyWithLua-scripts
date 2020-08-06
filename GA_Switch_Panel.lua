@@ -1,20 +1,25 @@
 logMsg("GA_Switch_Panel script loaded")
 
 -- Define buttons
-btn_generator = 484
-btn_battery = 485
-btn_fuel_pump = 492
-btn_beacon = 491
-btn_landing = 490
-btn_taxi = 489
-btn_nav = 488
-btn_strobe = 487
-btn_pitot = 486
-btn_avionics = 493
-btn_parkbrake = 494
+btn_base = 480
+btn_mag_left  = btn_base + 0
+btn_mag_right = btn_base + 1
+btn_generator = btn_base + 3
+btn_battery   = btn_base + 4
+btn_fuel_pump = btn_base + 5
+btn_beacon    = btn_base + 6
+btn_landing   = btn_base + 7
+btn_taxi      = btn_base + 8
+btn_nav       = btn_base + 9
+btn_strobe    = btn_base + 10
+btn_pitot     = btn_base + 11
+btn_avionics  = btn_base + 12
+btn_parkbrake = btn_base + 13
+btn_extra     = btn_base + 14
+btn_starter   = btn_base + 15
 
--- starter switch_panel
--- TODO
+-- ignition key
+dataref("xp_ignition", "sim/cockpit2/engine/actuators/ignition_key", "writable")
 
 -- generator
 dataref("xp_generator", "sim/cockpit2/electrical/generator_on", "writable")
@@ -52,8 +57,34 @@ dataref("xp_avionics2", "sim/cockpit2/electrical/cross_tie", "writable")
 dataref("xp_parkbrake", "sim/flightmodel/controls/parkbrake", "writable")
 
 function switch_panel()
-    -- starter switch_panel
-    -- TODO
+    -- ignition key
+    xp_ignition_set = 0
+    xp_starter_set = 0
+    
+    if button(btn_starter) then
+        xp_starter_set = 1
+    end
+        
+    mag_left = button(btn_mag_left)
+    mag_right = button(btn_mag_right)
+    
+    if mag_left then
+        xp_ignition_set = 1
+    end
+    
+    if mag_right then
+        xp_ignition_set = 2
+    end
+    
+    if mag_left and mag_right then
+        xp_ignition_set = 3
+    end
+    
+    if xp_ignition_set == 3 and xp_starter_set == 1 then
+        xp_ignition = 4
+    else
+        xp_ignition = xp_ignition_set
+    end
     
     -- generator
     if button(btn_generator) then
