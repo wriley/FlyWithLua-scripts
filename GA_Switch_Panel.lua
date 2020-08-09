@@ -18,6 +18,11 @@ btn_parkbrake = btn_base + 13
 btn_gear      = btn_base + 14
 btn_starter   = btn_base + 15
 
+isREP = false
+if string.match(AIRCRAFT_PATH, "REP") then
+    isREP = true
+end
+
 -- ignition key
 dataref("xp_ignition", "sim/cockpit2/engine/actuators/ignition_key", "writable")
 
@@ -51,7 +56,10 @@ dataref("xp_pitot", "sim/cockpit/switches/pitot_heat_on", "writable")
 
 -- avionics
 dataref("xp_avionics", "sim/cockpit2/switches/avionics_power_on", "writable")
-dataref("xp_avionics2", "sim/cockpit2/electrical/cross_tie", "writable")
+if isREP then
+    dataref("xp_avionics2", "simcoders/rep/cockpit2/switches/avionics_power_on", "writable")
+end
+dataref("xp_avionics3", "sim/cockpit2/electrical/cross_tie", "writable")
 
 -- parkbrake
 dataref("xp_parkbrake", "sim/flightmodel/controls/parkbrake", "writable")
@@ -162,10 +170,16 @@ function switch_panel()
     -- avionics
     if button(btn_avionics) then
         xp_avionics = 1
-        xp_avionics2 = 1
+        if isREP then
+            xp_avionics2 = 1
+        end
+        xp_avionics3 = 1
     else
         xp_avionics = 0
-        xp_avionics2 = 0
+        if isREP then
+            xp_avionics2 = 0
+        end
+        xp_avionics3 = 0
     end
     
     -- parkbrake
